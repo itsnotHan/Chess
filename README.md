@@ -1,2 +1,2 @@
 # Chess
-Attempting to create a chess engine in c and then c++
+Attempting to create a chess engine first in python then in c.
