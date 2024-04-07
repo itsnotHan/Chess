@@ -4,7 +4,7 @@ GameState object.
 """
 
 import pygame as p
-from Chess import ChessEngine 
+import ChessEngine
 
 WIDTH = HEIGHT = 512 
 DIMENSION = 8 #dimensions of a chess board are 8x8
@@ -17,7 +17,7 @@ Initalize a global dictionary of images. This will be called exactly once in the
 """
 
 def load_images():
-    pieces = ['wP', 'wR', 'wN', 'wB', 'wK', 'wQ','bP', 'bR', 'bN', 'bB', 'bK', 'bQ']
+    pieces = ['wP', 'wR', 'wN', 'wB', 'wK', 'wQ', 'bP', 'bR', 'bN', 'bB', 'bK', 'bQ']
     for piece in pieces:
         IMAGES[piece] = p.transform.scale(p.image.load("images/" + piece + ".png"), (SQ_SIZE, SQ_SIZE)) 
         #Note: we can access an image by saying 'IMAGES['wP']'
@@ -51,13 +51,14 @@ def drawGameState(screen, gs):
     drawPieces(screen, gs.board) #draw pieces on top of squares
 
 def drawBoard(screen):
-    colors = [p.Color('white'), p.Color('gray')]
+    colors = [p.Color("light gray"), p.Color("dark green")]
     for r in range(DIMENSION):
         for c in range(DIMENSION): 
             color = colors[((r+c) % 2)]
             p.draw.rect(screen, color, p.Rect(c*SQ_SIZE, r*SQ_SIZE, SQ_SIZE, SQ_SIZE))
 
-def drawPieces(screen, board): 
+def drawPieces(screen, board):
+    pass
 
     if __name__ == "__main__":
         main() 
