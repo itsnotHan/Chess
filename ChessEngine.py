@@ -18,11 +18,20 @@ class GameState():
         self.whiteToMove = True
         self.moveLog = []
 
+#will not work for castling, en passant, and pawn promotion
+
     def makeMove(self, move):
         self.board[move.startRow][move.startCol] = "--"
         self.board[move.endRow][move.endCol] = move.pieceMoved
         self.moveLog.append(move) #log the move
         self.whiteToMove = not self.whiteToMove #switch turns
+
+    def undoMove(self):
+        if len(self.moveLog) !=0:
+            move = self.moveLog.pop()
+            self.board[move.startRow][move.startCol] = move.pieceMoved
+            self.board[move.endRow][move.endCol] = move.pieceCaptured
+            self.whiteToMove = not self.whiteToMove #switch turns
 
 class Move():
     #map values to keys
