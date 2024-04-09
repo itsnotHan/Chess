@@ -34,7 +34,6 @@ def main():
     gs = ChessEngine.GameState()
     validMoves = gs.getValidMoves()
     moveMade = False #flag variable for when a move is made
-
     loadImages() #only do this once, before the while loop
     running = True
     sqSelected = () #empty, no square is selected; keep track of the last click (tuple: (row, col))
@@ -72,7 +71,6 @@ def main():
         if moveMade:
             validMoves = gs.getValidMoves()
             moveMade = False
-
 
         drawGameState(screen, gs)
         clock.tick(MAX_FPS)
