@@ -59,11 +59,12 @@ class GameState():
                 moves.append(Move((r,c), (r-1, c), self.board))
                 if r == 6 and self.board[r-2][c] == "--": #2 square pawn advance
                     moves.append(Move((r,c), (r-2, c), self.board))
+            #captures
             if c-1 >= 0: #captures to the left, so we can't capture piece across the board
-                if self.board[r-1][c-1][0] == "b": #enemy piece to capture
+                if self.board[r-1][c-1][0] == 'b': #enemy piece to capture
                     moves.append(Move((r, c), (r-1, c-1), self.board))
             if c+1 <= 7: #captures to the right
-                if self.board[r-1][c+1][0] == "b":
+                if self.board[r-1][c+1][0] == 'b':
                     moves.append(Move((r, c), (r-1, c+1), self.board))
 
         else:
@@ -71,12 +72,15 @@ class GameState():
                 moves.append(Move((r,c), (r+1, c), self.board))
                 if r == 1 and self.board[r+2][c] == "--": #2 square pawn advance
                     moves.append(Move((r,c), (r+2, c), self.board))
+            #captures
             if c-1 >= 0: #captures to the left, so we can't capture piece across the board
-                if self.board[r+1][c+1][0] == "w": #enemy piece to capture
-                    moves.append(Move((r, c), (r+1, c+1), self.board))
+                if self.board[r+1][c-1][0] == 'w': #enemy piece to capture
+                    moves.append(Move((r, c), (r+1, c-1), self.board))
             if c+1 <= 7: #captures to the right
-                if self.board[r+1][c+1][0] == "w":
+                if self.board[r+1][c+1][0] == 'w':
                     moves.append(Move((r, c), (r+1, c+1), self.board))
+
+            #add pawn promotion later
 
 
 
@@ -85,8 +89,23 @@ class GameState():
     '''
 
     def getRookMoves(self, r, c, moves):
-        pass
-
+        directions = ((-1, 0), (0, -1), (1, 0), (0, 1)) #left, right, up, down
+        enemyColor = 'b' if self.whiteToMove else 'w'
+        for d in directions:
+            for i in range(1, 8):
+                endRow = r + d[0] * i
+                endCol = c + d[1] * i
+                if 0<= endRow < 8 and 0<= endCol < 8: #on board
+                    endPiece = self.board[endRow][endCol]
+                    if endPiece == "--": #empty square is valid
+                        moves.append(Move((r, c), (endRow, endCol), self.board))
+                    elif endPiece[0] == enemyColor: #enemy piece valid
+                        moves.append(Move((r, c), (endRow, endCol), self.board))
+                        break
+                else: #our own piece blocking rook
+                    break
+            else: #going off the board
+                break
     '''
     Get all the rook moves for the pawn located at row, col and add these moves to the list 
     '''
