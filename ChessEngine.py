@@ -90,7 +90,7 @@ class GameState():
 
     def getRookMoves(self, r, c, moves):
         directions = ((-1, 0), (0, -1), (1, 0), (0, 1)) #up, left, down, right
-        enemyColor = 'b' if self.whiteToMove else 'w'
+        enemyColor = "b" if self.whiteToMove else "w"
         for d in directions:
             for i in range(1, 8):
                 endRow = r + d[0] * i
@@ -112,7 +112,7 @@ class GameState():
 
     def getKnightMoves(self, r, c, moves):
         knightMoves = ((-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1), )
-        allyColor = 'w' if self.whiteToMove else 'b'
+        allyColor = "w" if self.whiteToMove else "b"
         for m in knightMoves:
             endRow = r + m[0]
             endCol = r + m[1]
@@ -127,7 +127,7 @@ class GameState():
 
     def getBishopMoves(self, r, c, moves):
         directions = ((-1, -1), (-1, 1), (1, -1), (1,1))
-        enemyColor = 'b' if self.whiteToMove else 'w'
+        enemyColor = "b" if self.whiteToMove else "w"
         for d in directions:
             for i in range(1, 8): #bishop can move max of 7 squares
                 endRow = r + d[0] * i
@@ -158,6 +158,14 @@ class GameState():
 
     def getkingMoves(self, r, c, moves):
         kingMoves = ((-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1))
+        allyColor = "w" if self.whiteToMove else "w"
+        for i in range(8):
+            endRow = r + kingMoves[i][0]
+            endCol = r + kingMoves[i][1]
+            if 0 <= endRow < 8 and 0 <= endCol < 8:
+                endPiece = self.board[endRow][endCol]
+                if endPiece[0] != allyColor: #empty or enemy piece is a valid move
+                    moves.append(Move((r, c), (endRow, endCol), self.board))
 
 
 
