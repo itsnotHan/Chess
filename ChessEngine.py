@@ -19,6 +19,9 @@ class GameState():
                               'B': self.getBishopMoves, 'Q': self.getQueenMoves, "K": self.getkingMoves}
         self.whiteToMove = True
         self.moveLog = []
+        self.whiteKingLocation = (7, 4)
+        self.blackKingLocation = (0, 4)
+
 
 #will not work for castling, en passant, and pawn promotion
 
@@ -27,6 +30,12 @@ class GameState():
         self.board[move.endRow][move.endCol] = move.pieceMoved
         self.moveLog.append(move) #log the move
         self.whiteToMove = not self.whiteToMove #switch turns
+        #update the king's location if moved
+        if move.pieceMove == "wK":
+            self.whiteKingLocation = (move.endRow, move.endCol)
+        elif move.pieceMove == "bK":
+            self.blackKingLocation = (move.endRow, move.endCol)
+
 
     def undoMove(self):
         if len(self.moveLog) !=0:
