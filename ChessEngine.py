@@ -111,7 +111,15 @@ class GameState():
     '''
 
     def getKnightMoves(self, r, c, moves):
-        pass
+        knightMoves = ((-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, 2), (2, -1), (2, 1))
+        allyColor = 'w' if self.whiteToMove else 'b'
+        for m in knightMoves:
+            endRow = r + m[0]
+            endCol = r + m[1]
+            if 0<= endRow < 8 and 0 <= endCol < 8:
+                endPiece = self.board[endRow][endCol]
+                if endPiece[0] != allyColor: #empty square or enemy piece on square is a valid knight move
+                    moves.append(Move((r, c), (endRow, endCol), self.board))
 
     '''
     Get all the rook moves for the pawn located at row, col and add these moves to the list 
@@ -121,10 +129,10 @@ class GameState():
         directions = ((-1, -1), (-1, 1), (1, -1), (1,1))
         enemyColor = 'b' if self.whiteToMove else 'w'
         for d in directions:
-            for i in range(1, 8):
+            for i in range(1, 8): #bishop can move max of 7 squares
                 endRow = r + d[0] * i
                 endCol = r + d[1] * i
-                if 0<= endRow < 8 and 0 <= endCol < 8:
+                if 0<= endRow < 8 and 0 <= endCol < 8: #is it on the board
                     endPiece = self.board[endRow][endCol]
                     if endPiece == "--": #empty square is valid
                         moves.append(Move((r, c), (endRow, endCol), self.board))
@@ -141,7 +149,8 @@ class GameState():
     '''
 
     def getQueenMoves(self, r, c, moves):
-        pass
+        self.getBishopMoves(r, c, moves)
+        self.getRookMoves(r, c, moves)
 
     '''
     Get all the king moves for the pawn located at row, col and add these moves to the list 
