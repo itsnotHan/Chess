@@ -158,6 +158,60 @@ class GameState():
 	Get all possible moves for a Rook located at (r,c) and add the moves to the list.
 	'''
 	def getRookMoves(self, r, c, moves):
+		# #UP THE FILE
+		# for i in range(r-1,-1,-1):
+		# 	#Empty Square
+		# 	if self.board[i][c] == '--':
+		# 		moves.append(Move((r, c), (i, c), self.board))
+		# 	#Capture opponent's piece
+		# 	elif self.board[i][c][0] != self.board[r][c][0]:
+		# 		moves.append(Move((r, c), (i, c), self.board))
+		# 		break
+		# 	#Same Color piece
+		# 	else:
+		# 		break
+
+		# #DOWN THE FILE
+		# for i in range(r+1, len(self.board)):
+		# 	#Empty Square
+		# 	if self.board[i][c] == '--':
+		# 		moves.append(Move((r, c), (i, c), self.board))
+		# 	#Capture Oponent's piece
+		# 	elif self.board[i][c][0] != self.board[r][c][0]:
+		# 		moves.append(Move((r, c), (i, c), self.board))
+		# 		break
+		# 	# Same color piece
+		# 	else:
+		# 		break
+
+		# #LEFT IN THE RANK
+		# for i in range(c-1,-1,-1):
+		# 	#Empty Square
+		# 	if self.board[r][i] == '--':
+		# 		moves.append(Move((r, c), (r, i), self.board))
+		# 	#Capture Oponent's piece
+		# 	elif self.board[r][i][0] != self.board[r][c][0]:
+		# 		moves.append(Move((r, c), (r, i), self.board))
+		# 		break
+		# 	# Same color piece
+		# 	else:
+		# 		break
+
+		# #RIGHT IN THE RANK
+		# for i in range(c+1, len(self.board[r])):
+		# 	#Empty Square
+		# 	if self.board[r][i] == '--':
+		# 		moves.append(Move((r, c), (r, i), self.board))
+		# 	#Capture Oponent's piece
+		# 	elif self.board[r][i][0] != self.board[r][c][0]:
+		# 		moves.append(Move((r, c), (r, i), self.board))
+		# 		break
+		# 	# Same color piece
+		# 	else:
+		# 		break
+
+		# -----------  ANOTHER WAY TO IMPLEMENT THIS   ---------- #
+
 		directions = ((-1,0) , (1,0) , (0,-1), (0,1)) # up down left right
 		enemyColor = 'b' if self.whiteToMove else 'w' # opponenet's color according to current turn
 		for d in directions:
@@ -264,6 +318,3 @@ class Move():
 	def __eq__(self,other):
 		return isinstance(other, Move) and self.moveId == other.moveId
 
-
-
-    

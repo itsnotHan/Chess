@@ -6,14 +6,14 @@ GameState object.
 import pygame as p
 import ChessEngine
 
-WIDTH = HEIGHT = 800
+WIDTH = HEIGHT = 1024
 DIMENSION = 8 #dimensions of a chess board are 8x8
 SQ_SIZE = HEIGHT//DIMENSION
 MAX_FPS = 15 #for animations 
 IMAGES = {}
 
 """
-Initalize a global dictionary of images. This will be called exactly once in the main
+Initialize a global dictionary of images. This will be called exactly once in the main
 """
 
 def loadImages():
@@ -101,4 +101,4 @@ def drawPieces(screen, board):
                 screen.blit(IMAGES[piece], p.Rect(c*SQ_SIZE, r*SQ_SIZE, SQ_SIZE, SQ_SIZE))
 
 if __name__ == "__main__":
-    main()
+	main()
